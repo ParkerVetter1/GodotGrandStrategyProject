@@ -13,24 +13,44 @@ func _process(delta: float) -> void:
 func load_regions():
 	var image = mapImage.get_texture().get_image()
 	var pixel_color_dict = get_pixel_color_dict(image)
-	var regions_dict = import_file("res://Map_Data/RegionsColorCodes.txt")
+	var province_dict = import_file("res://Map_Data/ProvinceColorCodes.txt")
 	
-	for region_color in regions_dict:
-		var region = load("res://Scenes/Region_Area.tscn").instantiate()
-		region.set_name(regions_dict[region_color])
-		get_node("Regions").add_child(region)
+	for province_color in province_dict:
+		var province = load("res://Scenes/Province_Area.tscn").instantiate()
+		province.set_name(province_dict[province_color])
 		
-		var polygons = get_polygons(image, region_color, pixel_color_dict)
+		var polygons = get_polygons(image, province_color, pixel_color_dict)
 		
 		for polygon in polygons:
-			var region_collision = CollisionPolygon2D.new()
-			var region_polygon = Polygon2D.new()
+			var province_collision = CollisionPolygon2D.new()
+			var province_polygon = Polygon2D.new()
 
-			region_collision.polygon = polygon
-			region_polygon.polygon = polygon
+			province_collision.polygon = polygon
+			province_polygon.polygon = polygon
 
-			region.add_child(region_collision)
-			region.add_child(region_polygon)
+			province.add_child(province_collision)
+			province.add_child(province_polygon)
+		loadProvinceIntoRegions(province)
+
+func loadProvinceIntoRegions(province):
+	findRegionNode(province.name, province)
+
+# will return a string if the node is found otherwise will make it
+func findRegionNode(possibleName, province):
+	var regionName : String = possibleName
+	regionName = regionName.substr(0, regionName.length() - 2)
+	var node = get_node("Regions").find_child(regionName)
+	if node != null: #if child with name regionName is in list do
+		node.add_child(province) # add child to the regionName node
+	else: #if cant find then make a new region node
+		var newRegion = createRegion(regionName) #make region node
+		newRegion.add_child(province)
+
+func createRegion(name : String):
+	var region = load("res://Scenes/Region.tscn").instantiate()
+	region.name = name
+	get_node("Regions").add_child(region)
+	return region
 
 func get_pixel_color_dict(image):
 	var pixel_color_dict = {}
@@ -55,7 +75,7 @@ func get_polygons(image, region_color, pixel_color_dict):
 func import_file(filepath):
 	var file = FileAccess.open(filepath, FileAccess.READ)
 	if file != null:
-		return JSON.parse_string(file.get_as_text().replace("_", " "))
+		return JSON.parse_string(file.get_as_text())
 	else:
 		print("Failed to open file:", filepath)
 		return null

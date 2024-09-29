@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var region_name = name
+@onready var province_name = name
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,5 +30,5 @@ func _on_mouse_exited() -> void:
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
-		print(str(region_name) + " Clicked")
+		print(str(province_name) + " Clicked")
 		
