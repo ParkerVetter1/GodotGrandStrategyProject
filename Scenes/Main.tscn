@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbs0py12sls8i"]
+
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_rko5y"]
+[ext_resource type="Texture2D" uid="uid://da6osur1lr1ck" path="res://Map_Data/FinishedMap.png" id="2_mfqj3"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_rko5y")
+
+[node name="SpriteMap" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("2_mfqj3")
+centered = false
+
+[node name="Regions" type="Node2D" parent="."]
