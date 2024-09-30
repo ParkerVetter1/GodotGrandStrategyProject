@@ -1,6 +1,8 @@
 extends Node2D
 
 @onready var mapImage = %SpriteMap
+var referenceToRegionsNodes = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	mapImage.visible = false
@@ -39,12 +41,17 @@ func loadProvinceIntoRegions(province):
 func findRegionNode(possibleName, province):
 	var regionName : String = possibleName
 	regionName = regionName.substr(0, regionName.length() - 2)
-	var node = get_node("Regions").find_child(regionName)
+	var node
+# Iterate over the nodes directly
+	for n in referenceToRegionsNodes:
+		if n.name == regionName:  # Compare directly with the node's name
+			node = n
+			break
 	if node != null: #if child with name regionName is in list do
 		node.add_child(province) # add child to the regionName node
 	else: #if cant find then make a new region node
-		var newRegion = createRegion(regionName) #make region node
-		newRegion.add_child(province)
+		referenceToRegionsNodes.append(createRegion(regionName)) #make region node
+		referenceToRegionsNodes[-1].add_child(province)
 
 func createRegion(name : String):
 	var region = load("res://Scenes/Region.tscn").instantiate()
