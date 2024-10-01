@@ -14,7 +14,7 @@ func _ready() -> void:
 
 #the last clickedProvince
 func clickedNode(node):
-	emit_signal("provinceWasClicked", node.name) # Emit the signal
+	emit_signal("provinceWasClicked", node) # Emit the signal
 
 func getClickedCallFromEachNode():
 	var k = -1

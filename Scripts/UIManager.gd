@@ -1,6 +1,7 @@
 extends Control
 
-@onready var label = $Label
+@onready var label = $HeaderUIPanel/ClickedOnProvince
+var clickedOnNode
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -8,8 +9,8 @@ func _ready() -> void:
 	MainNode.connect("provinceWasClicked", Callable(self, "clickedNode"))
 
 func clickedNode(nameOfNodeClicked):
-	label.text = label.text + nameOfNodeClicked
+	clickedOnNode = nameOfNodeClicked
+	#label.text = "Last Province Clicked On: " + nameOfNodeClicked.name + "Metal: " + str(nameOfNodeClicked.resources["Metal"])
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	label.text = "Last Province Clicked On: " + clickedOnNode.name + "Metal: " + str(clickedOnNode.resources["Metal"])

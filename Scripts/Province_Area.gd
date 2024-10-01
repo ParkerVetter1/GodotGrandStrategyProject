@@ -4,6 +4,13 @@ extends Area2D
 
 signal WasClicked
 
+var resources = {"Wood" : 0
+				,"Stone" : 0
+				,"Metal" : 0
+				,"hasTown" : false
+				,"hasArmy" : false
+				,"Population" : 0}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass

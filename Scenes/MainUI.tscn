@@ -14,9 +14,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nf2ua")
 
-[node name="Label" type="Label" parent="."]
+[node name="HeaderUIPanel" type="Panel" parent="."]
 layout_mode = 0
-offset_right = 240.0
-offset_bottom = 85.0
+offset_right = 1151.0
+offset_bottom = 129.0
+
+[node name="ClickedOnProvince" type="Label" parent="HeaderUIPanel"]
+layout_mode = 0
+offset_right = 371.0
+offset_bottom = 46.0
 text = "Last Clicked On Province: "
 label_settings = SubResource("LabelSettings_0m8tt")
