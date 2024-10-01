@@ -1,16 +1,27 @@
 extends Node2D
 
 @onready var mapImage = %SpriteMap
+
+signal provinceWasClicked
+
 var referenceToRegionsNodes = []
+var referenceToAllProvinces = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	mapImage.visible = false
 	load_regions()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+#the last clickedProvince
+func clickedNode(node):
+	emit_signal("provinceWasClicked", node.name) # Emit the signal
+
+func getClickedCallFromEachNode():
+	var k = -1
+	for n in referenceToRegionsNodes:
+		for i in n.get_child_count():
+			k = k + 1
+			referenceToAllProvinces[k].connect("WasClicked", Callable(self, "clickedNode"))
 
 func load_regions():
 	var image = mapImage.get_texture().get_image()
@@ -33,6 +44,8 @@ func load_regions():
 			province.add_child(province_collision)
 			province.add_child(province_polygon)
 		loadProvinceIntoRegions(province)
+		referenceToAllProvinces.append(province)
+	getClickedCallFromEachNode()
 
 func loadProvinceIntoRegions(province):
 	findRegionNode(province.name, province)

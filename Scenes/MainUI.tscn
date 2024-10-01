@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://0vmeeoo6lau4"]
+
+[ext_resource type="Script" path="res://Scripts/UIManager.gd" id="1_nf2ua"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0m8tt"]
+font_size = 30
+
+[node name="MainUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nf2ua")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 85.0
+text = "Last Clicked On Province: "
+label_settings = SubResource("LabelSettings_0m8tt")
