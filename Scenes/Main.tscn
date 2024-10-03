@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbs0py12sls8i"]
+[gd_scene load_steps=7 format=3 uid="uid://bbs0py12sls8i"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_rko5y"]
 [ext_resource type="Texture2D" uid="uid://da6osur1lr1ck" path="res://Map_Data/FinishedMap.png" id="2_mfqj3"]
 [ext_resource type="Script" path="res://Scripts/RegionsManager.gd" id="3_8g875"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="3_c6ewo"]
 [ext_resource type="PackedScene" uid="uid://0vmeeoo6lau4" path="res://Scenes/MainUI.tscn" id="5_0227v"]
+[ext_resource type="PackedScene" uid="uid://blwm8t6fk0st0" path="res://Scenes/Region_Data.tscn" id="6_mxu2u"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_rko5y")
@@ -35,7 +36,7 @@ offset_right = 1.0
 offset_bottom = 5.0
 mouse_filter = 1
 
-[node name="Regions_Data" type="Node" parent="."]
+[node name="Region_Data" parent="." instance=ExtResource("6_mxu2u")]
 unique_name_in_owner = true
 
 [connection signal="child_entered_tree" from="Regions" to="." method="_on_regions_child_entered_tree"]

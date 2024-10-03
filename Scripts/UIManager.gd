@@ -1,6 +1,7 @@
 extends Control
 
 @onready var label = $HeaderUIPanel/ClickedOnProvince
+
 var clickedOnNode
 var clickedHappened = false
 

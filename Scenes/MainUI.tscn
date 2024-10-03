@@ -39,10 +39,16 @@ offset_bottom = -0.0530014
 text = "Last Clicked On Province: "
 label_settings = SubResource("LabelSettings_0m8tt")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TimeAndDate" type="Label" parent="HeaderUIPanel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.003
-anchor_bottom = 0.199
-offset_right = 0.543945
-offset_bottom = 0.0479889
+anchor_left = 0.576
+anchor_top = 0.295
+anchor_right = 0.899
+anchor_bottom = 0.651
+offset_left = 0.523987
+offset_top = -0.0549965
+offset_right = -0.249023
+offset_bottom = 0.0209961
+text = "Last Clicked On Province: "
+label_settings = SubResource("LabelSettings_0m8tt")
