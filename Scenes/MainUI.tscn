@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://0vmeeoo6lau4"]
+[gd_scene load_steps=4 format=3 uid="uid://0vmeeoo6lau4"]
 
 [ext_resource type="Script" path="res://Scripts/UIManager.gd" id="1_nf2ua"]
+[ext_resource type="StyleBox" uid="uid://bvhudybkgx0xy" path="res://Layouts/BlackPanel.tres" id="2_uysxf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0m8tt"]
 font_size = 30
@@ -12,16 +13,36 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_nf2ua")
 
 [node name="HeaderUIPanel" type="Panel" parent="."]
-layout_mode = 0
-offset_right = 1151.0
-offset_bottom = 129.0
+z_index = 8
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.199
+offset_left = 0.5
+offset_right = -0.5
+offset_bottom = 0.0479889
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("2_uysxf")
 
 [node name="ClickedOnProvince" type="Label" parent="HeaderUIPanel"]
-layout_mode = 0
-offset_right = 371.0
-offset_bottom = 46.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.322
+anchor_bottom = 0.357
+offset_right = 0.37796
+offset_bottom = -0.0530014
 text = "Last Clicked On Province: "
 label_settings = SubResource("LabelSettings_0m8tt")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.003
+anchor_bottom = 0.199
+offset_right = 0.543945
+offset_bottom = 0.0479889

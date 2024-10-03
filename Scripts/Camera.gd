@@ -2,8 +2,11 @@ extends Camera2D
 
 var speed = 120
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var mainUI = 	%MainUi
+	#mainUI.
 	pass # Replace with function body.
 
 func _process(delta):

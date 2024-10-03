@@ -24,16 +24,19 @@ position = Vector2(578, 325)
 scale = Vector2(1.40104, 1.48148)
 script = ExtResource("3_c6ewo")
 
-[node name="MainUi" parent="Camera2D" instance=ExtResource("5_0227v")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -413.264
-offset_top = -215.325
-offset_right = -413.264
-offset_bottom = -215.325
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="MainUi" parent="CanvasLayer" instance=ExtResource("5_0227v")]
+unique_name_in_owner = true
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 1.0
+offset_bottom = 5.0
+mouse_filter = 1
+
+[node name="Regions_Data" type="Node" parent="."]
+unique_name_in_owner = true
 
 [connection signal="child_entered_tree" from="Regions" to="." method="_on_regions_child_entered_tree"]
 [connection signal="child_entered_tree" from="Regions" to="Regions" method="_on_child_entered_tree"]

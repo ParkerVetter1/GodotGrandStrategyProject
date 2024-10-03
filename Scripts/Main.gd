@@ -2,15 +2,21 @@ extends Node2D
 
 @onready var mapImage = %SpriteMap
 
+@onready var regions_Data = %Regions_Data
+
 signal provinceWasClicked
 
 var referenceToRegionsNodes = []
 var referenceToAllProvinces = []
 
+var dataReferenceToRegionsNodes = []
+var dataReferenceToAllProvinces = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	mapImage.visible = false
 	load_regions()
+	populateRegionsData()
 
 #the last clickedProvince
 func clickedNode(node):
@@ -22,6 +28,25 @@ func getClickedCallFromEachNode():
 		for i in n.get_child_count():
 			k = k + 1
 			referenceToAllProvinces[k].connect("WasClicked", Callable(self, "clickedNode"))
+
+########### Regions_Data loading ###########
+func populateRegionsData():
+	for n in referenceToRegionsNodes.size():
+		var region = load("res://Scenes/Region_Data.tscn").instantiate()
+		region.name = referenceToRegionsNodes[n].name
+		dataReferenceToRegionsNodes.append(region)
+		regions_Data.add_child(region)
+		for i in referenceToRegionsNodes[n].get_child_count():
+				var province = load("res://Scenes/Region_Data.tscn").instantiate()
+				i += 1
+				province.name = referenceToRegionsNodes[n].name + "_" + str(i)
+				i -= 1
+				dataReferenceToAllProvinces.append(province)
+				region.add_child(province)
+
+########### Regions_Data loading ###########
+
+########### Regions loading ###########
 
 func load_regions():
 	var image = mapImage.get_texture().get_image()
@@ -72,6 +97,10 @@ func createRegion(name : String):
 	get_node("Regions").add_child(region)
 	return region
 
+########### Regions loading ###########
+
+########### file import/ setup poylgons loading ###########
+
 func get_pixel_color_dict(image):
 	var pixel_color_dict = {}
 	for y in range(image.get_height()):
@@ -99,3 +128,5 @@ func import_file(filepath):
 	else:
 		print("Failed to open file:", filepath)
 		return null
+
+########### file import/ setup poylgons loading ###########
