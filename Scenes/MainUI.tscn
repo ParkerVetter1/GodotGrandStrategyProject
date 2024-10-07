@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://0vmeeoo6lau4"]
+[gd_scene load_steps=5 format=3 uid="uid://0vmeeoo6lau4"]
 
 [ext_resource type="Script" path="res://Scripts/UIManager.gd" id="1_nf2ua"]
 [ext_resource type="StyleBox" uid="uid://bvhudybkgx0xy" path="res://Layouts/BlackPanel.tres" id="2_uysxf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0m8tt"]
 font_size = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nkc6b"]
+bg_color = Color(0.305378, 0.557739, 0.731565, 1)
 
 [node name="MainUi" type="Control"]
 layout_mode = 3
@@ -19,13 +22,10 @@ script = ExtResource("1_nf2ua")
 
 [node name="HeaderUIPanel" type="Panel" parent="."]
 z_index = 8
-layout_mode = 1
-anchors_preset = -1
+layout_mode = 2
 anchor_right = 1.0
-anchor_bottom = 0.199
-offset_left = 0.5
-offset_right = -0.5
-offset_bottom = 0.0479889
+anchor_bottom = 0.215
+offset_bottom = -0.320007
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("2_uysxf")
 
@@ -39,16 +39,30 @@ offset_bottom = -0.0530014
 text = "Last Clicked On Province: "
 label_settings = SubResource("LabelSettings_0m8tt")
 
-[node name="TimeAndDate" type="Label" parent="HeaderUIPanel"]
+[node name="Time\'Panel" type="Panel" parent="HeaderUIPanel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.576
-anchor_top = 0.295
-anchor_right = 0.899
-anchor_bottom = 0.651
-offset_left = 0.523987
-offset_top = -0.0549965
-offset_right = -0.249023
-offset_bottom = 0.0209961
-text = "Last Clicked On Province: "
+anchor_left = 0.656
+anchor_top = 0.158
+anchor_right = 0.962
+anchor_bottom = 0.813
+offset_left = 0.287964
+offset_top = 0.0379982
+offset_right = -0.224121
+offset_bottom = -0.00700378
+theme_override_styles/panel = SubResource("StyleBoxFlat_nkc6b")
+
+[node name="TimeAndDate" type="Label" parent="HeaderUIPanel/Time\'Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.037
+anchor_top = 0.22
+anchor_right = 0.986
+anchor_bottom = 0.681
+offset_left = -0.0239849
+offset_top = -0.0200005
+offset_right = -0.0720215
+offset_bottom = 0.0289955
+text = "Time:"
 label_settings = SubResource("LabelSettings_0m8tt")
+max_lines_visible = 1

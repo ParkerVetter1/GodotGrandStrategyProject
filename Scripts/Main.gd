@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var mapImage = %SpriteMap
+@onready var Region_Data_Script = %Region_Data
 
 signal provinceWasClicked
 
@@ -11,8 +12,8 @@ var referenceToAllProvinces = []
 func _ready() -> void:
 	mapImage.visible = false
 	load_regions()
-	#how to access specific bullshit
-	referenceToAllProvinces[0].resources["Metal"] = 10
+	#load province data into other script
+	Region_Data_Script.createProvinceData()
 
 #the last clickedProvince
 func clickedNode(node):
