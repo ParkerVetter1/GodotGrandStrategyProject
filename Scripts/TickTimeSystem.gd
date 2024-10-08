@@ -57,8 +57,8 @@ func _on_timer_timeout() -> void:
 
 func hourUp():
 	for n in allProvincesData.size():
-		pass
-		#allProvincesData[n]["Metal"] += 1
+		if allProvincesData[n]["hasTown"]:
+			allProvincesData[n]["Population"] += 1
 	if date["Hour"] < 24:
 		date["Hour"] += 1
 	else:

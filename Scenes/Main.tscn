@@ -39,5 +39,7 @@ mouse_filter = 1
 [node name="Region_Data" parent="." instance=ExtResource("6_mxu2u")]
 unique_name_in_owner = true
 
+[node name="Node" type="Node" parent="."]
+
 [connection signal="child_entered_tree" from="Regions" to="." method="_on_regions_child_entered_tree"]
 [connection signal="child_entered_tree" from="Regions" to="Regions" method="_on_child_entered_tree"]

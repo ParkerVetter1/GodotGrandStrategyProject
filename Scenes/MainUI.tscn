@@ -29,17 +29,29 @@ offset_bottom = -0.320007
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("2_uysxf")
 
-[node name="ClickedOnProvince" type="Label" parent="HeaderUIPanel"]
+[node name="KingdomName" type="Label" parent="HeaderUIPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.322
 anchor_bottom = 0.357
 offset_right = 0.37796
 offset_bottom = -0.0530014
-text = "Last Clicked On Province: "
+text = "Kingdom Name: "
 label_settings = SubResource("LabelSettings_0m8tt")
 
-[node name="Time\'Panel" type="Panel" parent="HeaderUIPanel"]
+[node name="KingdomResources" type="Label" parent="HeaderUIPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.345
+anchor_right = 0.34
+anchor_bottom = 0.942
+offset_left = 2.0
+offset_top = 0.0449944
+offset_right = 0.320007
+offset_bottom = 0.0619965
+text = "Kingdom Resources: "
+
+[node name="TimePanel" type="Panel" parent="HeaderUIPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.656
@@ -52,7 +64,7 @@ offset_right = -0.224121
 offset_bottom = -0.00700378
 theme_override_styles/panel = SubResource("StyleBoxFlat_nkc6b")
 
-[node name="TimeAndDate" type="Label" parent="HeaderUIPanel/Time\'Panel"]
+[node name="TimeAndDate" type="Label" parent="HeaderUIPanel/TimePanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.037
@@ -66,3 +78,92 @@ offset_bottom = 0.0289955
 text = "Time:"
 label_settings = SubResource("LabelSettings_0m8tt")
 max_lines_visible = 1
+
+[node name="ProvinceMenu" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.215
+anchor_right = 0.215
+anchor_bottom = 1.0
+offset_top = -0.320007
+offset_right = 0.319992
+
+[node name="ClickedOnProvince" type="Label" parent="ProvinceMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.084
+offset_right = 1.0
+offset_bottom = 0.243996
+text = "Clicked On Province"
+horizontal_alignment = 1
+
+[node name="ResourceInProvince" type="Label" parent="ProvinceMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.083
+anchor_right = 1.0
+anchor_bottom = 0.32
+offset_top = -0.247002
+offset_bottom = 0.119995
+text = "Resources in province: "
+
+[node name="SettleButton" type="Button" parent="ProvinceMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.316
+anchor_right = 1.0
+anchor_bottom = 0.389
+offset_top = 0.155991
+offset_bottom = -0.00100708
+text = "Settle"
+
+[node name="BuildMine" type="Button" parent="ProvinceMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.316
+anchor_right = 1.0
+anchor_bottom = 0.389
+offset_top = 0.155991
+offset_bottom = -0.00100708
+text = "Build Mine"
+
+[node name="BuildForge" type="Button" parent="ProvinceMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.389
+anchor_right = 1.0
+anchor_bottom = 0.466
+offset_top = -0.00100708
+offset_bottom = -0.194016
+text = "Build Forge"
+
+[node name="BuildCropField" type="Button" parent="ProvinceMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.466
+anchor_right = 1.0
+anchor_bottom = 0.54
+offset_top = -0.194016
+offset_bottom = -0.860016
+text = "Build Crop Field"
+
+[node name="BuildForesterHut" type="Button" parent="ProvinceMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.536
+anchor_right = 1.0
+anchor_bottom = 0.609
+offset_top = 0.175995
+offset_bottom = 0.0189819
+text = "Build Forester Hut"
+
+[connection signal="pressed" from="ProvinceMenu/SettleButton" to="." method="_on_settle_button_pressed"]
+[connection signal="pressed" from="ProvinceMenu/BuildMine" to="." method="_on_build_mine_pressed"]
+[connection signal="pressed" from="ProvinceMenu/BuildForge" to="." method="_on_build_forge_pressed"]
+[connection signal="pressed" from="ProvinceMenu/BuildCropField" to="." method="_on_build_crop_field_pressed"]
+[connection signal="pressed" from="ProvinceMenu/BuildForesterHut" to="." method="_on_build_forester_hut_pressed"]
