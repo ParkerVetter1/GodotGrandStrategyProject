@@ -3,15 +3,17 @@ extends Node
 @onready var Main = self.get_parent()
 @onready var timeAndDate = get_parent().find_child("CanvasLayer").get_child(0).get_child(0).find_child("TimeAndDate")
 
+signal sendProvinceData
+
 var isprocessed = false
 var provinceReferences
 
 var date = {"Hour" : 1
 			,"Day" : 1
 			,"Month" : 1
-			,"Year" : 1800}
+			,"Year" : 1100}
 
-# Need this to be not 1 dictionary but the template of 1 i can copy and assign to each province
+
 var provinceVariables = {"Wood" : 0
 						,"Stone" : 0
 						,"Metal" : 0
@@ -19,7 +21,11 @@ var provinceVariables = {"Wood" : 0
 						,"hasArmy" : false
 						,"Population" : 0
 						,"Owner" : 0
-						,"ProvinceName": " "}
+						,"ProvinceName": " "
+						,"hasMine" : false
+						,"hasForge" : false
+						,"hasCropField" : false
+						,"hasForesterHut" : false}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -49,6 +55,9 @@ var allRegionsData = []
 
 ########### Region Data ###########
 
+
+##all reasource managment should happen within the TIME zone need to write down documentation 
+##if there is a instance of the rule being broken
 ########### Time ###########
 
 func _on_timer_timeout() -> void:
@@ -56,9 +65,7 @@ func _on_timer_timeout() -> void:
 	isprocessed = true
 
 func hourUp():
-	for n in allProvincesData.size():
-		if allProvincesData[n]["hasTown"]:
-			allProvincesData[n]["Population"] += 1
+	
 	if date["Hour"] < 24:
 		date["Hour"] += 1
 	else:
@@ -66,22 +73,41 @@ func hourUp():
 		dayUp()
 
 func dayUp():
+	for n in allProvincesData.size():
+		if allProvincesData[n]["hasTown"]:
+			if allProvincesData[n]["hasMine"]:
+				allProvincesData[n]["Stone"] += 10
+				if randi() % 5 + 1 == 1 || 2:      # Returns between 1 and 5
+					allProvincesData[n]["Metal"] += 1
+			if allProvincesData[n]["hasForge"]:
+				pass ##this will be used to make units
+			if allProvincesData[n]["hasCropField"]:
+				allProvincesData[n]["Population"] += 1
+			if allProvincesData[n]["hasForesterHut"]:
+				allProvincesData[n]["Wood"] += 10
 	
-	if date["Day"] < 31:
+	if date["Day"] < 10:
 		date["Day"] += 1
 	else:
-		date["Day"] = 1
 		monthUp()
+		date["Day"] = 1
 
 func monthUp():
+	for n in allProvincesData.size():
+		if allProvincesData[n]["Owner"] == 1:
+			emit_signal("sendProvinceData", allProvincesData[n]["Wood"], allProvincesData[n]["Stone"], allProvincesData[n]["Metal"])
+			allProvincesData[n]["Wood"] = 0
+			allProvincesData[n]["Stone"] = 0
+			allProvincesData[n]["Metal"] = 0
 	
 	if date["Month"] < 12:
-		date["Day"] += 1
+		date["Month"] += 1
 	else:
 		date["Month"] = 1
 		yearUp()
 
 func yearUp():
+	
 	
 	date["Year"] += 1
 
