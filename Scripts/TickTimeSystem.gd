@@ -74,10 +74,11 @@ func hourUp():
 
 func dayUp():
 	for n in allProvincesData.size():
+		var r = randi() % 3 + 1      # Returns between 1 and 5
 		if allProvincesData[n]["hasTown"]:
 			if allProvincesData[n]["hasMine"]:
 				allProvincesData[n]["Stone"] += 10
-				if randi() % 5 + 1 == 1 || 2:      # Returns between 1 and 5
+				if r == 1:
 					allProvincesData[n]["Metal"] += 1
 			if allProvincesData[n]["hasForge"]:
 				pass ##this will be used to make units
@@ -95,10 +96,11 @@ func dayUp():
 func monthUp():
 	for n in allProvincesData.size():
 		if allProvincesData[n]["Owner"] == 1:
-			emit_signal("sendProvinceData", allProvincesData[n]["Wood"], allProvincesData[n]["Stone"], allProvincesData[n]["Metal"])
+			emit_signal("sendProvinceData", allProvincesData[n]["Wood"], allProvincesData[n]["Stone"], allProvincesData[n]["Metal"], allProvincesData[n]["Population"])
 			allProvincesData[n]["Wood"] = 0
 			allProvincesData[n]["Stone"] = 0
 			allProvincesData[n]["Metal"] = 0
+			allProvincesData[n]["Population"] = 0
 	
 	if date["Month"] < 12:
 		date["Month"] += 1
@@ -110,5 +112,4 @@ func yearUp():
 	
 	
 	date["Year"] += 1
-
 ########### Time ###########

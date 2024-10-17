@@ -3,6 +3,8 @@ extends Node2D
 @onready var mapImage = %SpriteMap
 @onready var Region_Data_Script = %Region_Data
 
+var idsOfPlayers = []
+
 signal provinceWasClicked
 
 var referenceToRegionsNodes = []

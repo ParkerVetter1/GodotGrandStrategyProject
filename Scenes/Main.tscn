@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bbs0py12sls8i"]
+[gd_scene load_steps=9 format=3 uid="uid://bbs0py12sls8i"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_rko5y"]
 [ext_resource type="Texture2D" uid="uid://da6osur1lr1ck" path="res://Map_Data/FinishedMap.png" id="2_mfqj3"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://0vmeeoo6lau4" path="res://Scenes/MainUI.tscn" id="5_0227v"]
 [ext_resource type="PackedScene" uid="uid://blwm8t6fk0st0" path="res://Scenes/Region_Data.tscn" id="6_mxu2u"]
 [ext_resource type="Script" path="res://Scripts/playerKingdomScript.gd" id="7_b3ke0"]
+[ext_resource type="Script" path="res://Scripts/EnemyPlayer.gd" id="8_6bx6w"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_rko5y")
@@ -42,6 +43,9 @@ unique_name_in_owner = true
 
 [node name="PlayerKingdomNode" type="Node" parent="."]
 script = ExtResource("7_b3ke0")
+
+[node name="EnemyPlayerNode" type="Node" parent="."]
+script = ExtResource("8_6bx6w")
 
 [connection signal="child_entered_tree" from="Regions" to="." method="_on_regions_child_entered_tree"]
 [connection signal="child_entered_tree" from="Regions" to="Regions" method="_on_child_entered_tree"]

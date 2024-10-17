@@ -70,10 +70,15 @@ func _process(delta: float) -> void:
 
 
 func _on_settle_button_pressed() -> void:
-	Region_Data.allProvincesData[locationOfData]["hasTown"] = true
-	Region_Data.allProvincesData[locationOfData]["Owner"] = playerKingdom_Data.OwnerIdNumber
-	clickedOnNode.modulate = playerKingdom_Data.playerColor
-
+	if playerKingdom_Data.kingdomResources["Wood"] >= 150 && playerKingdom_Data.kingdomResources["Stone"] >= 150:
+		playerKingdom_Data.kingdomResources["Wood"] -= 150
+		playerKingdom_Data.kingdomResources["Stone"] -= 150
+		playerKingdom_Data.kingdomResources["ProvincesOwned"] += 1
+		Region_Data.allProvincesData[locationOfData]["hasTown"] = true
+		Region_Data.allProvincesData[locationOfData]["Owner"] = playerKingdom_Data.OwnerIdNumber
+		clickedOnNode.modulate = playerKingdom_Data.playerColor
+	else:
+		print("Not Enough Resources")
 
 func _on_build_mine_pressed() -> void:
 	Region_Data.allProvincesData[locationOfData]["hasMine"] = true

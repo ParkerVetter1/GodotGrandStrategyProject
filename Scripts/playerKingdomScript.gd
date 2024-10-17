@@ -3,8 +3,8 @@ extends Node
 var OwnerIdNumber = 1
 var playerColor = Color.RED
 
-var kingdomResources = {"Wood" : 0
-						,"Stone" : 0
+var kingdomResources = {"Wood" : 150
+						,"Stone" : 150
 						,"Metal" : 0
 						,"ProvincesOwned" : 0
 						,"Population" : 0
@@ -19,7 +19,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _on_region_data_send_province_data(Wood, Stone, Metal) -> void:
+func _on_region_data_send_province_data(Wood, Stone, Metal, Population) -> void:
 	kingdomResources["Wood"] += Wood
 	kingdomResources["Stone"] += Stone
 	kingdomResources["Metal"] += Metal
+	kingdomResources["Population"] += Population
