@@ -44,10 +44,10 @@ func load_regions():
 		for polygon in polygons:
 			var province_collision = CollisionPolygon2D.new()
 			var province_polygon = Polygon2D.new()
-
+			
 			province_collision.polygon = polygon
 			province_polygon.polygon = polygon
-
+			
 			province.add_child(province_collision)
 			province.add_child(province_polygon)
 		loadProvinceIntoRegions(province)

@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "GrandStrategy": {
+      "commandName": "Project"
+    },
+    "GodotDebug": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\eunoi\\Desktop\\Godot_v4.3-stable_mono_win64\\Godot_v4.3-stable_mono_win64.exe",
+      "workingDirectory": ".",
+      "nativeDebugging": true
+    }
+  }
+}

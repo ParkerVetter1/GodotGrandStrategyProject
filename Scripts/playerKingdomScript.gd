@@ -1,23 +1,17 @@
 extends Node
 
 var OwnerIdNumber = 1
-var playerColor = Color.RED
 
 var kingdomResources = {"Wood" : 150
 						,"Stone" : 150
 						,"Metal" : 0
 						,"ProvincesOwned" : 0
 						,"Population" : 0
-						,"KingdomName": "Player_Kingdom"}
+						,"KingdomName": "Player_Kingdom"
+						,"ProvinceColor": Color.RED}
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	get_parent().idsOfPlayers.append(OwnerIdNumber)
 
 func _on_region_data_send_province_data(Wood, Stone, Metal, Population) -> void:
 	kingdomResources["Wood"] += Wood

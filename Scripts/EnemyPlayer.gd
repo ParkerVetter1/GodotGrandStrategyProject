@@ -1,29 +1,24 @@
 extends Node
 
 @onready var mainNode = get_parent()
+@onready var Region_Data = mainNode.find_child("Region_Data")
 
 var enemySpawnReferenceNode
+var enemyNode
 
-var EnemyResources = {   "OwnerIdNumber" : null
-						,"ProvincesOwned" : 0
-						,"Population" : 0
-						,"KingdomName": "Horde"}
-
-func spawnEnemyStartNode(province):
+func spawnEnemyStartNode(province, provinceData):
 	enemySpawnReferenceNode = province
+	enemyNode = load("res://Scenes/EnemyPlayer.tscn").instantiate()
+	enemyNode.ProvinceStarted = enemySpawnReferenceNode
+	enemyNode.provinceData = provinceData
+	self.add_child(enemyNode)
+	assignOwnerId()
 
 func assignOwnerId():
-	EnemyResources["OwnerIdNumber"] = makeSureIdIsntUsed()
+	var unUsedId = makeSureIdIsntUsed()
+	enemyNode.EnemyResources["OwnerIdNumber"] = unUsedId
+	mainNode.idsOfPlayers.append(unUsedId)
 
+## this function is broken
 func makeSureIdIsntUsed():
-	for i in mainNode.idsOfPlayers.size():
-		## start at the number two becuase player is 1 and noone can be 0
-		var n = 2
-		if !mainNode.idsOfPlayers[i] == 0:
-			mainNode.idsOfPlayers[i] = n
-			return n
-		n += 1
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	return mainNode.idsOfPlayers[mainNode.idsOfPlayers.size() - 1] + 1

@@ -2,11 +2,13 @@ extends Node
 
 @onready var Main = self.get_parent()
 @onready var timeAndDate = get_parent().find_child("CanvasLayer").get_child(0).get_child(0).find_child("TimeAndDate")
+var EnemyPlayerNode
 
 signal sendProvinceData
 
 var isprocessed = false
 var provinceReferences
+var enemySpawn = false
 
 var date = {"Hour" : 1
 			,"Day" : 1
@@ -65,7 +67,7 @@ func _on_timer_timeout() -> void:
 	isprocessed = true
 
 func hourUp():
-	
+
 	if date["Hour"] < 24:
 		date["Hour"] += 1
 	else:
@@ -101,7 +103,8 @@ func monthUp():
 			allProvincesData[n]["Stone"] = 0
 			allProvincesData[n]["Metal"] = 0
 			allProvincesData[n]["Population"] = 0
-	
+	if enemySpawn == false:
+		SpawnEnemy()
 	if date["Month"] < 12:
 		date["Month"] += 1
 	else:
@@ -113,3 +116,12 @@ func yearUp():
 	
 	date["Year"] += 1
 ########### Time ###########
+
+func SpawnEnemy():
+	enemySpawn = true
+	EnemyPlayerNode = Main.find_child("EnemyPlayerNode")
+	while true:
+		var random = randi_range(0, allProvincesData.size())
+		if allProvincesData[random]["Owner"] != 1:
+			EnemyPlayerNode.spawnEnemyStartNode(provinceReferences[random], allProvincesData[random])
+			break

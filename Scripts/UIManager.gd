@@ -76,7 +76,7 @@ func _on_settle_button_pressed() -> void:
 		playerKingdom_Data.kingdomResources["ProvincesOwned"] += 1
 		Region_Data.allProvincesData[locationOfData]["hasTown"] = true
 		Region_Data.allProvincesData[locationOfData]["Owner"] = playerKingdom_Data.OwnerIdNumber
-		clickedOnNode.modulate = playerKingdom_Data.playerColor
+		clickedOnNode.modulate = playerKingdom_Data.kingdomResources["ProvinceColor"]
 	else:
 		print("Not Enough Resources")
 
