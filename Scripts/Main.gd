@@ -7,12 +7,14 @@ var idsOfPlayers = []
 
 signal provinceWasClicked
 
+var loadTxtFile = false
+
 var referenceToRegionsNodes = []
 var referenceToAllProvinces = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	mapImage.visible = false
+	mapImage.visible
 	load_regions()
 	#load province data into other script
 	Region_Data_Script.createProvinceData()
@@ -33,11 +35,18 @@ func getClickedCallFromEachNode():
 func load_regions():
 	var image = mapImage.get_texture().get_image()
 	var pixel_color_dict = get_pixel_color_dict(image)
-	var province_dict = import_file("res://Map_Data/ProvinceColorCodes.txt")
+	var province_dict
+	if loadTxtFile:
+		province_dict = import_file("res://Map_Data/ProvinceColorCodes.txt")
 	
-	for province_color in province_dict:
+	for province_color in pixel_color_dict:
 		var province = load("res://Scenes/Province_Area.tscn").instantiate()
-		province.set_name(province_dict[province_color])
+		if !loadTxtFile:
+			# Set name using the province color code directly
+			province.set_name(province_color)
+		else:
+			# If using an imported dictionary, ensure it gives a unique string name for each color
+			province.set_name(province_dict[province_color] if province_color in province_dict else province_color)
 		
 		var polygons = get_polygons(image, province_color, pixel_color_dict)
 		
@@ -50,12 +59,14 @@ func load_regions():
 			
 			province.add_child(province_collision)
 			province.add_child(province_polygon)
-		loadProvinceIntoRegions(province)
+			loadProvinceIntoRegions(province)
 		referenceToAllProvinces.append(province)
 	getClickedCallFromEachNode()
 
 func loadProvinceIntoRegions(province):
-	findRegionNode(province.name, province)
+	if !(province.name == "000000"):
+		get_node("Regions").add_child(province)
+	##findRegionNode(province.name, province)
 
 # will return a string if the node is found otherwise will make it
 func findRegionNode(possibleName, province):
@@ -87,7 +98,7 @@ func get_pixel_color_dict(image):
 	var pixel_color_dict = {}
 	for y in range(image.get_height()):
 		for x in range(image.get_width()):
-			var pixel_color = "#" + str(image.get_pixel(int(x), int(y)).to_html(false))
+			var pixel_color = image.get_pixel(int(x), int(y)).to_html(false)
 			if pixel_color not in pixel_color_dict:
 				pixel_color_dict[pixel_color] = []
 			pixel_color_dict[pixel_color].append(Vector2(x, y))

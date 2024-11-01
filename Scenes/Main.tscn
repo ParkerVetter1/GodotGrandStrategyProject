@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bbs0py12sls8i"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_rko5y"]
-[ext_resource type="Texture2D" uid="uid://da6osur1lr1ck" path="res://Map_Data/FinishedMap.png" id="2_mfqj3"]
+[ext_resource type="Script" path="res://Scripts/GrabImage.gd" id="2_28vbg"]
 [ext_resource type="Script" path="res://Scripts/RegionsManager.gd" id="3_8g875"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="3_c6ewo"]
 [ext_resource type="PackedScene" uid="uid://0vmeeoo6lau4" path="res://Scenes/MainUI.tscn" id="5_0227v"]
@@ -16,8 +16,8 @@ script = ExtResource("1_rko5y")
 unique_name_in_owner = true
 position = Vector2(-82, -334)
 scale = Vector2(1.40104, 1.48148)
-texture = ExtResource("2_mfqj3")
 centered = false
+script = ExtResource("2_28vbg")
 
 [node name="Regions" type="Node2D" parent="."]
 script = ExtResource("3_8g875")
