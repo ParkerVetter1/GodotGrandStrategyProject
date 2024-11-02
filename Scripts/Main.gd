@@ -12,6 +12,8 @@ var loadTxtFile = false
 var referenceToRegionsNodes = []
 var referenceToAllProvinces = []
 
+var fantasyProvincesNames = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	mapImage.visible
@@ -24,11 +26,8 @@ func clickedNode(node):
 	emit_signal("provinceWasClicked", node) # Emit the signal
 
 func getClickedCallFromEachNode():
-	var k = -1
-	for n in referenceToRegionsNodes:
-		for i in n.get_child_count():
-			k = k + 1
-			referenceToAllProvinces[k].connect("WasClicked", Callable(self, "clickedNode"))
+	for n in find_child("Regions").get_child_count():
+		referenceToAllProvinces[n].connect("WasClicked", Callable(self, "clickedNode"))
 
 ########### Regions loading ###########
 
@@ -39,11 +38,16 @@ func load_regions():
 	if loadTxtFile:
 		province_dict = import_file("res://Map_Data/ProvinceColorCodes.txt")
 	
+	# we need to skip the first "province" because the first one is always the size of the entire image
+	var firstCheck = 0
 	for province_color in pixel_color_dict:
+		if firstCheck == 0:
+			firstCheck = 1
+			continue  # Skip the first item
 		var province = load("res://Scenes/Province_Area.tscn").instantiate()
 		if !loadTxtFile:
 			# Set name using the province color code directly
-			province.set_name(province_color)
+			province.set_name(randomProvinceName())
 		else:
 			# If using an imported dictionary, ensure it gives a unique string name for each color
 			province.set_name(province_dict[province_color] if province_color in province_dict else province_color)
@@ -63,9 +67,25 @@ func load_regions():
 		referenceToAllProvinces.append(province)
 	getClickedCallFromEachNode()
 
+func readInProvinceNames():
+	var file = FileAccess.open("res://Map_Data/fantasyProvinces.txt", FileAccess.READ)
+	if file != null:
+		while not file.eof_reached():
+			fantasyProvincesNames.append(file.get_line().strip_edges())
+		file.close()
+	else:
+		print("File not found")
+
+func randomProvinceName():
+	if fantasyProvincesNames.size() == 0:
+		readInProvinceNames()
+	var randomNum = randi_range(0, (fantasyProvincesNames.size() - 1))
+	var name = fantasyProvincesNames[randomNum]
+	fantasyProvincesNames.pop_at(randomNum)
+	return name
+
 func loadProvinceIntoRegions(province):
-	if !(province.name == "000000"):
-		get_node("Regions").add_child(province)
+	get_node("Regions").add_child(province)
 	##findRegionNode(province.name, province)
 
 # will return a string if the node is found otherwise will make it
