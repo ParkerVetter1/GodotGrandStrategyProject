@@ -11,8 +11,8 @@ func spawnEnemyStartNode(province, provinceData):
 	enemyNode = load("res://Scenes/EnemyPlayer.tscn").instantiate()
 	enemyNode.ProvinceStarted = enemySpawnReferenceNode
 	enemyNode.provinceData = provinceData
-	self.add_child(enemyNode)
 	assignOwnerId()
+	self.add_child(enemyNode)
 
 func assignOwnerId():
 	var unUsedId = makeSureIdIsntUsed()

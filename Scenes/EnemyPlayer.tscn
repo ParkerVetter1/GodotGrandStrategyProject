@@ -4,3 +4,5 @@
 
 [node name="EnemyPlayer" type="Node"]
 script = ExtResource("1_nkki8")
+
+[node name="ArmiesNode" type="Node" parent="."]

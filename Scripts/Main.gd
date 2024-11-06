@@ -14,6 +14,8 @@ var referenceToAllProvinces = []
 
 var fantasyProvincesNames = []
 
+var provinceCenters = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	mapImage.visible
@@ -26,7 +28,7 @@ func clickedNode(node):
 	emit_signal("provinceWasClicked", node) # Emit the signal
 
 func getClickedCallFromEachNode():
-	for n in find_child("Regions").get_child_count():
+	for n in find_child("Provinces").get_child_count():
 		referenceToAllProvinces[n].connect("WasClicked", Callable(self, "clickedNode"))
 
 ########### Regions loading ###########
@@ -65,6 +67,8 @@ func load_regions():
 			province.add_child(province_polygon)
 			loadProvinceIntoRegions(province)
 		referenceToAllProvinces.append(province)
+		# get the province center and store it in the array
+		provinceCenters.append(calculate_centroid(province.get_child(1).polygon))
 	getClickedCallFromEachNode()
 
 func readInProvinceNames():
@@ -85,7 +89,7 @@ func randomProvinceName():
 	return name
 
 func loadProvinceIntoRegions(province):
-	get_node("Regions").add_child(province)
+	get_node("Provinces").add_child(province)
 	##findRegionNode(province.name, province)
 
 # will return a string if the node is found otherwise will make it
@@ -107,7 +111,7 @@ func findRegionNode(possibleName, province):
 func createRegion(name : String):
 	var region = load("res://Scenes/Region.tscn").instantiate()
 	region.name = name
-	get_node("Regions").add_child(region)
+	get_node("Provinces").add_child(region)
 	return region
 
 ########### Regions loading ###########
@@ -143,3 +147,36 @@ func import_file(filepath):
 		return null
 
 ########### file import/ setup poylgons loading ###########
+
+########### Get center of each province ###########
+
+# Function to calculate the centroid of a polygon
+func calculate_centroid(points: Array) -> Vector2:
+	var area = 0.0
+	var centroid_x = 0.0
+	var centroid_y = 0.0
+	
+	for i in range(points.size()):
+		# Get the current point and the next point (loop back to the first point if we're at the last one)
+		var p1 = points[i]
+		var p2 = points[(i + 1) % points.size()]
+		
+		# Calculate the cross product of the two points
+		var cross_product = p1.x * p2.y - p2.x * p1.y
+		area += cross_product
+		centroid_x += (p1.x + p2.x) * cross_product
+		centroid_y += (p1.y + p2.y) * cross_product
+	
+	# Finalize area calculation
+	area *= 0.5
+	
+	# Prevent division by zero if the area is zero
+	if area == 0:
+		return Vector2.ZERO
+		print("area = 0")
+	
+	# Calculate the centroid coordinates
+	centroid_x /= (6 * area)
+	centroid_y /= (6 * area)
+	
+	return Vector2(centroid_x, centroid_y)

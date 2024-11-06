@@ -19,7 +19,7 @@ scale = Vector2(1.40104, 1.48148)
 centered = false
 script = ExtResource("2_28vbg")
 
-[node name="Regions" type="Node2D" parent="."]
+[node name="Provinces" type="Node2D" parent="."]
 script = ExtResource("3_8g875")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -47,6 +47,6 @@ script = ExtResource("7_b3ke0")
 [node name="EnemyPlayerNode" type="Node" parent="."]
 script = ExtResource("8_6bx6w")
 
-[connection signal="child_entered_tree" from="Regions" to="." method="_on_regions_child_entered_tree"]
-[connection signal="child_entered_tree" from="Regions" to="Regions" method="_on_child_entered_tree"]
+[connection signal="child_entered_tree" from="Provinces" to="." method="_on_regions_child_entered_tree"]
+[connection signal="child_entered_tree" from="Provinces" to="Provinces" method="_on_child_entered_tree"]
 [connection signal="sendProvinceData" from="Region_Data" to="PlayerKingdomNode" method="_on_region_data_send_province_data"]

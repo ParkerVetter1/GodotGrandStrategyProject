@@ -109,6 +109,7 @@ offset_bottom = 0.119995
 text = "Resources in province: "
 
 [node name="SettleButton" type="Button" parent="ProvinceMenu"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.316
@@ -119,7 +120,6 @@ offset_bottom = -0.00100708
 text = "Settle"
 
 [node name="BuildMine" type="Button" parent="ProvinceMenu"]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.316
@@ -130,7 +130,6 @@ offset_bottom = -0.00100708
 text = "Build Mine"
 
 [node name="BuildForge" type="Button" parent="ProvinceMenu"]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.389
@@ -141,7 +140,6 @@ offset_bottom = -0.194016
 text = "Build Forge"
 
 [node name="BuildCropField" type="Button" parent="ProvinceMenu"]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.466
@@ -152,7 +150,6 @@ offset_bottom = -0.860016
 text = "Build Crop Field"
 
 [node name="BuildForesterHut" type="Button" parent="ProvinceMenu"]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.536
@@ -162,8 +159,19 @@ offset_top = 0.175995
 offset_bottom = 0.0189819
 text = "Build Forester Hut"
 
+[node name="BuildArmy" type="Button" parent="ProvinceMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.609
+anchor_right = 1.0
+anchor_bottom = 0.682
+offset_top = 0.0189819
+offset_bottom = -0.138031
+text = "Build Army Here"
+
 [connection signal="pressed" from="ProvinceMenu/SettleButton" to="." method="_on_settle_button_pressed"]
 [connection signal="pressed" from="ProvinceMenu/BuildMine" to="." method="_on_build_mine_pressed"]
 [connection signal="pressed" from="ProvinceMenu/BuildForge" to="." method="_on_build_forge_pressed"]
 [connection signal="pressed" from="ProvinceMenu/BuildCropField" to="." method="_on_build_crop_field_pressed"]
 [connection signal="pressed" from="ProvinceMenu/BuildForesterHut" to="." method="_on_build_forester_hut_pressed"]
+[connection signal="pressed" from="ProvinceMenu/BuildArmy" to="." method="_on_build_army_pressed"]

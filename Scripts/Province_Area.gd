@@ -4,10 +4,15 @@ extends Area2D
 
 signal WasClicked
 
+@onready var shader = load("res://Layouts/Outline.gdshader")
+@onready var shaderMaterial = load("res://Layouts/OutlineMaterial.tres")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
-
+	#shaderMaterial.shader = shader
+	#get_child(1).material = shaderMaterial
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

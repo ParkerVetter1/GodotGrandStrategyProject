@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://d3if2uss1xrw6"]
+
+[ext_resource type="Shader" path="res://Layouts/Outline.gdshader" id="1_j8tbn"]
+
+[resource]
+shader = ExtResource("1_j8tbn")
+shader_parameter/outline_thickness = 2.0
+shader_parameter/outline_color = Vector4(1, 0, 0, 1)
+shader_parameter/viewport_size = null
